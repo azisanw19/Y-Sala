@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Y Sala</string>
+    <string name="icon">icon</string>
+    <string name="splash_welcome">WELCOME TO Y SALA</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="sign_in">Sign in</string>
+    <string name="no_account">Don\'t have an account? <b>Sign up</b></string>
+
+    <string name="head_sign_up"><b>Hey There</b><br />Create account to join</string>
+    <string name="full_name">Full name</string>
+    <string name="phone_number">+62-xxx-xxxx-xxxx</string>
+    <string name="have_account">Have an account? <b>Sign in</b></string>
+    <string name="sign_up">Sign up</string>
+    <string name="search_hint">Yogyakarta, Jawa Tengah</string>
+</resources>
