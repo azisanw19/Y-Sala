@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "815528079511",
+    "firebase_url": "https://y-sala.firebaseio.com",
+    "project_id": "y-sala",
+    "storage_bucket": "y-sala.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:815528079511:android:3a69aff001f01a50e939d2",
+        "android_client_info": {
+          "package_name": "id.canwar.ysala"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "815528079511-l10l44bnq7o8g8mtl6k0q4h1cjsm0sdr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9tSkStLSm1mHNKj7RFW_DC_ZqOre44hQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "815528079511-l10l44bnq7o8g8mtl6k0q4h1cjsm0sdr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

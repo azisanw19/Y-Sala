@@ -22,61 +22,113 @@
             app:drawableTopCompat="@drawable/img_icon" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tv_sign_up"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/normal_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:layout_marginBottom="@dimen/normal_margin"
+            android:layout_gravity=""
             android:text="@string/head_sign_up"
-            android:lineSpacingExtra="@dimen/small_margin"/>
+            android:textColor="@android:color/black" />
 
         <EditText
             android:id="@+id/et_full_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/full_name"
+            android:layout_height="@dimen/et_round_height"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:background="@drawable/et_round"
+            android:hint= "@string/full_name"
+            android:drawableStart="@drawable/custom_ic_profile_gray"
+            android:drawablePadding="@dimen/normal_margin"
+            android:ems="10"
             android:inputType="textPersonName"
-            android:importantForAutofill="no"
-            android:layout_margin="@dimen/normal_margin" />
+            android:paddingStart="@dimen/normal_margin"
+            android:paddingEnd="@dimen/normal_margin"
+            android:textSize="@dimen/normal_text_size"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/et_email"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/email"
+            android:layout_height="@dimen/et_round_height"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:background="@drawable/et_round"
+            android:hint= "@string/email"
+            android:drawableStart="@drawable/custom_ic_email"
+            android:drawablePadding="@dimen/normal_margin"
+            android:ems="10"
             android:inputType="textEmailAddress"
-            android:importantForAutofill="no"
-            android:layout_margin="@dimen/normal_margin"/>
+            android:paddingStart="@dimen/normal_margin"
+            android:paddingEnd="@dimen/normal_margin"
+            android:textSize="@dimen/normal_text_size"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/et_phone_number"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/phone_number"
+            android:layout_height="@dimen/et_round_height"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:background="@drawable/et_round"
+            android:hint= "@string/phone_number"
+            android:drawableStart="@drawable/custom_ic_phone"
+            android:drawablePadding="@dimen/normal_margin"
+            android:ems="10"
             android:inputType="phone"
-            android:importantForAutofill="no"
-            android:layout_margin="@dimen/normal_margin" />
+            android:paddingStart="@dimen/normal_margin"
+            android:paddingEnd="@dimen/normal_margin"
+            android:textSize="@dimen/normal_text_size"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/et_round_height"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:background="@drawable/et_round"
             android:hint="@string/password"
+            android:drawableStart="@drawable/custom_ic_password"
+            android:drawablePadding="@dimen/normal_margin"
+            android:ems="10"
             android:inputType="textPassword"
-            android:importantForAutofill="no"
-            android:layout_margin="@dimen/normal_margin"/>
+            android:paddingStart="@dimen/normal_margin"
+            android:paddingEnd="@dimen/normal_margin"
+            android:textSize="@dimen/normal_text_size"
+            android:importantForAutofill="no" />
+
 
         <Button
             android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_up"
-            android:layout_margin="@dimen/normal_margin" />
+            android:layout_height="@dimen/et_round_height"
+            android:layout_marginTop="@dimen/section_margin"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:background="@drawable/btn_round"
+            android:text="@string/sign_in"
+            android:textSize="@dimen/normal_text_size"
+            android:textColor="@android:color/white"
+            android:ems="10"
+            android:textAllCaps="false" />
 
         <TextView
-            android:id="@+id/tv_have_account"
+            android:id="@+id/tv_sign_in"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/have_account" />
+            android:layout_marginTop="@dimen/section_margin"
+            android:layout_marginBottom="@dimen/section_margin"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:text="@string/have_account"
+            android:textColor="@android:color/black" />
 
     </LinearLayout>
 
