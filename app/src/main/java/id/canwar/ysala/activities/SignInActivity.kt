@@ -48,8 +48,11 @@ class SignInActivity : AppCompatActivity() {
             if (!isError) {
                 firebaseAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener {
-                        val intent = Intent(this, DashboardActivity::class.java)
-                        startActivity(intent)
+                        if (it.isSuccessful) {
+                            val intent = Intent(this, DashboardActivity::class.java)
+                            startActivity(intent)
+                            finish()
+                        }
                     }
                     .addOnFailureListener {
                         Toast.makeText(this, it.toString(), Toast.LENGTH_SHORT).show()

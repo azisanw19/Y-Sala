@@ -12,6 +12,7 @@
         android:elevation="6dp"
         android:background="@color/colorPrimary"
         app:tabIndicatorColor="@color/colorAccent"
+        app:tabIconTint="@color/white"
         app:tabIndicatorHeight="2dp"
         app:tabMinWidth="150dp"
         app:tabSelectedTextColor="@android:color/white" >

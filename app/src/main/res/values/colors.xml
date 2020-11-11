@@ -8,6 +8,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary">#FF005D6B</color>
+    <color name="colorPrimary">#FF235F26</color>
     <color name="colorAccent">#FFFE7347</color>
+
+    <color name="md_green_100_dark">#ACDAAE</color>
+    <color name="md_green_200_dark">#89CA8D</color>
+    <color name="md_green_300_dark">#65BB69</color>
+    <color name="md_green_400_dark">#4CAC51</color>
+    <color name="md_green_500_dark">#409343</color>
+    <color name="md_green_600_dark">#37833A</color>
+    <color name="md_green_700_dark">#2C7130</color>
+    <color name="md_green_800_dark">#235F26</color>
+    <color name="md_green_900_dark">#113E15</color>
 </resources>
