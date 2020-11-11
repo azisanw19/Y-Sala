@@ -10,6 +10,7 @@
 
     <color name="colorPrimary">#FF235F26</color>
     <color name="colorAccent">#FFFE7347</color>
+    <color name="cardColor">#FCC350</color>
 
     <color name="md_green_100_dark">#ACDAAE</color>
     <color name="md_green_200_dark">#89CA8D</color>
