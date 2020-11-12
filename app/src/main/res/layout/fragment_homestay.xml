@@ -4,9 +4,39 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
+        android:id="@+id/tv_sign_in"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="HomestayFragment"
-        android:textSize="36sp" />
+        android:layout_marginTop="@dimen/normal_margin"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginEnd="@dimen/normal_margin"
+        android:text="@string/booking_homestay"
+        android:textSize="@dimen/actionbar_text_size"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/et_round_height"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginEnd="@dimen/normal_margin"
+        android:background="@drawable/et_round"
+        android:hint= "@string/search_hint"
+        android:drawableStart="@drawable/custom_ic_location"
+        android:drawablePadding="@dimen/normal_margin"
+        android:ems="10"
+        android:inputType="text"
+        android:paddingStart="@dimen/normal_margin"
+        android:paddingEnd="@dimen/normal_margin"
+        android:textSize="@dimen/normal_text_size"
+        android:importantForAutofill="no" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/homestay_rv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/normal_margin"
+        android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginEnd="@dimen/normal_margin"/>
+
 </LinearLayout>

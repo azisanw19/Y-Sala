@@ -22,4 +22,7 @@
     <string name="discount"><i>Special Price for You</i></string>
     <string name="top_homestay"><i>Top 1 in Indonesia</i></string>
     <string name="health_covid"><i>Health Protocol Covid-19</i></string>
+    <string name="booking_homestay">Booking Homestay</string>
+    <string name="homestay_image">Homestay image</string>
+    <string name="details">Details</string>
 </resources>
