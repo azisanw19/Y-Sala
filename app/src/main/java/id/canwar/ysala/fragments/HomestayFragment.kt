@@ -1,7 +1,6 @@
 package id.canwar.ysala.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import id.canwar.ysala.adapters.HomestayAdapter
 import id.canwar.ysala.helpers.FIREBASE_HOMESTAYS
 import id.canwar.ysala.models.Homestay
 import kotlinx.android.synthetic.main.fragment_homestay.view.*
-import java.time.LocalDate
 
 class HomestayFragment : Fragment() {
 
@@ -37,13 +35,12 @@ class HomestayFragment : Fragment() {
 
     private fun initRecyclerView(view: View) {
 
-        val homestays = ArrayList<Homestay>()
-
         val databaseReference = firebaseDatabase.getReference(FIREBASE_HOMESTAYS)
 
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                Log.e("homestay snapshot", "${snapshot.children.count()}")
+                val homestays = ArrayList<Homestay>()
+
                 for (dataSnapshot in snapshot.children) {
                     val homestay = dataSnapshot.getValue(Homestay::class.java)!!
 

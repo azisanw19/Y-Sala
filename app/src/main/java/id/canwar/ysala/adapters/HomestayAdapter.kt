@@ -28,7 +28,7 @@ class HomestayAdapter(val context: Context, val homestays: ArrayList<Homestay>) 
         fun bind(homestay: Homestay) {
             view.tv_name.text = homestay.name
             view.tv_price.text = "$RUPIAH${homestay.price}$END_RUPIAH"
-            view.tv_address.text = homestay.adderss
+            view.tv_address.text = homestay.address
         }
 
     }
