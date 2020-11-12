@@ -30,7 +30,7 @@
 
 
             <ImageView
-                android:id="@+id/imageView2"
+                android:id="@+id/iv_homestay"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
                 tools:srcCompat="@tools:sample/backgrounds/scenic"
@@ -44,7 +44,7 @@
                 android:layout_marginEnd="@dimen/normal_margin">
 
                 <TextView
-                    android:id="@+id/tv_title"
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/normal_margin"
@@ -55,11 +55,11 @@
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/tv_cost"
+                    android:id="@+id/tv_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/smaller_margin"
-                    android:layout_below="@id/tv_title"
+                    android:layout_below="@id/tv_name"
                     tools:text="Rp. 150.000,00"
                     android:textColor="@android:color/black" />
 
@@ -68,7 +68,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/normal_margin"
-                    android:layout_below="@id/tv_cost"
+                    android:layout_below="@id/tv_price"
                     tools:text="Jalan Puncak Indah Rt 09 Rw 02, Bogor, Jawa Barat"
                     android:textColor="@android:color/black" />
 
@@ -79,7 +79,7 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
                     android:text="@string/details"
-                    android:textStyle="italic|bold|"
+                    android:textStyle="italic|bold"
                     android:textColor="@color/blue_dark" />
 
             </RelativeLayout>
