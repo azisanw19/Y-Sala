@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import id.canwar.ysala.R
 import id.canwar.ysala.helpers.END_RUPIAH
 import id.canwar.ysala.helpers.RUPIAH
@@ -29,6 +30,14 @@ class HomestayAdapter(val context: Context, val homestays: ArrayList<Homestay>) 
             view.tv_name.text = homestay.name
             view.tv_price.text = "$RUPIAH${homestay.price}$END_RUPIAH"
             view.tv_address.text = homestay.address
+
+            try {
+                if (homestay.image != "") {
+                    Picasso.get().load(homestay.image).into(view.iv_homestay)
+                }
+            } catch (e: Exception) {
+
+            }
         }
 
     }
