@@ -32,7 +32,7 @@
         android:importantForAutofill="no" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/homestay_rv"
+        android:id="@+id/rv_homestay"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/normal_margin"

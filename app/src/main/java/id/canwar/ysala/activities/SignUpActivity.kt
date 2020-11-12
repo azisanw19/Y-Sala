@@ -61,8 +61,7 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             if (!isError) {
-                val user = User(null, fullName, email, phone)
-                firebaseAddUser(user, password)
+                firebaseAddUser(fullName, email, phone, password)
             }
         }
 
@@ -73,12 +72,14 @@ class SignUpActivity : AppCompatActivity() {
 
     }
 
-    private fun firebaseAddUser(user: User, password: String) {
+    private fun firebaseAddUser(fullName: String, email: String, phone: String, password: String) {
 
-        firebaseAuth.createUserWithEmailAndPassword(user.email, password)
+        firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
                         val uid = firebaseAuth.uid!!
+
+                        val user = User(uid, fullName, email, phone)
 
                         val databaseReference = firebaseDatabase.getReference(FIREBASE_USERS)
 
