@@ -38,6 +38,10 @@ class HomestayAdapter(val context: Context, val homestays: ArrayList<Homestay>) 
             } catch (e: Exception) {
 
             }
+
+            view.setOnClickListener {
+                // Intent go to booking activity and passing data class homestay
+            }
         }
 
     }
