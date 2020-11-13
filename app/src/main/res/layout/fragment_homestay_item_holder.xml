@@ -85,4 +85,6 @@
             </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <!-- Bug dibawah potongan ada yang -->
 </FrameLayout>

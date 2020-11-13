@@ -1,5 +1,6 @@
 package id.canwar.ysala.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,7 +36,19 @@ class DetailsHomestayActivity : AppCompatActivity() {
         }
 
         tv_booking.setOnClickListener {
-            // Go to activity Booking
+            Intent(this, BookingActivity::class.java).apply {
+                val bundle = Bundle().apply {
+                    putExtra(HOMESTAY_ID, homestay!!.id)
+                    putExtra(HOMESTAY_NAME, homestay!!.name)
+                    putExtra(HOMESTAY_IMAGE, homestay!!.image)
+                    putExtra(HOMESTAY_ADDRESS, homestay!!.address)
+                    putExtra(HOMESTAY_PRICE, homestay!!.price)
+                }
+
+                putExtras(bundle)
+
+                startActivity(this)
+            }
         }
 
         getDataFacilities()
