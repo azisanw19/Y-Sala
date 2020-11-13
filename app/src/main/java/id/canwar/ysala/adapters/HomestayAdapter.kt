@@ -2,14 +2,13 @@ package id.canwar.ysala.adapters
 
 import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import id.canwar.ysala.R
-import id.canwar.ysala.activities.BookingActivity
+import id.canwar.ysala.activities.DetailsHomestayActivity
 import id.canwar.ysala.helpers.*
 import id.canwar.ysala.models.Homestay
 import kotlinx.android.synthetic.main.fragment_homestay_item_holder.view.*
@@ -42,7 +41,7 @@ class HomestayAdapter(val context: Context, val homestays: ArrayList<Homestay>) 
             }
 
             view.setOnClickListener {
-                val intent = Intent(it.context, BookingActivity::class.java).apply {
+                val intent = Intent(it.context, DetailsHomestayActivity::class.java).apply {
                     putExtra(HOMESTAY_ID, homestay.id)
                     putExtra(HOMESTAY_NAME, homestay.name)
                     putExtra(HOMESTAY_IMAGE, homestay.image)
