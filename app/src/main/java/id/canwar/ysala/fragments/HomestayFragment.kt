@@ -1,6 +1,8 @@
 package id.canwar.ysala.fragments
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,12 +27,18 @@ class HomestayFragment : Fragment() {
 
         view = (inflater.inflate(R.layout.fragment_homestay, container, false) as ViewGroup).apply {
 
-            initRecyclerView(this)
+//            initRecyclerView(this)
 
         }
 
         return view
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        initRecyclerView(view)
     }
 
     private fun initRecyclerView(view: View) {
@@ -45,12 +53,14 @@ class HomestayFragment : Fragment() {
                     val homestay = dataSnapshot.getValue(Homestay::class.java)!!
 
                     homestays.add(homestay)
-                    val homestayAdapter = HomestayAdapter(view.context, homestays)
-                    view.rv_homestay.apply {
-                        layoutManager = LinearLayoutManager(context)
-                        adapter = homestayAdapter
-                    }
+                }
 
+                Log.e("database retieve", "data")
+
+                val homestayAdapter = HomestayAdapter(view.context, homestays)
+                view.rv_homestay.apply {
+                    layoutManager = LinearLayoutManager(context)
+                    adapter = homestayAdapter
                 }
             }
 

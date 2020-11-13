@@ -2,6 +2,8 @@ package id.canwar.ysala.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,16 +42,23 @@ class HomestayAdapter(val context: Context, val homestays: ArrayList<Homestay>) 
 
             }
 
-            view.setOnClickListener {
-                val intent = Intent(it.context, DetailsHomestayActivity::class.java).apply {
-                    putExtra(HOMESTAY_ID, homestay.id)
-                    putExtra(HOMESTAY_NAME, homestay.name)
-                    putExtra(HOMESTAY_IMAGE, homestay.image)
-                    putExtra(HOMESTAY_ADDRESS, homestay.address)
-                    putExtra(HOMESTAY_PRICE, homestay.price)
-                }
+            view.details.setOnClickListener {
 
-                it.context.startActivity(intent)
+                Log.e("click view", "clicked")
+
+                Intent(it.context, DetailsHomestayActivity::class.java).apply {
+                    val bundle = Bundle().apply {
+                        putExtra(HOMESTAY_ID, homestay.id)
+                        putExtra(HOMESTAY_NAME, homestay.name)
+                        putExtra(HOMESTAY_IMAGE, homestay.image)
+                        putExtra(HOMESTAY_ADDRESS, homestay.address)
+                        putExtra(HOMESTAY_PRICE, homestay.price)
+                    }
+
+                    putExtras(bundle)
+
+                    view.context.startActivity(this)
+                }
 
             }
         }

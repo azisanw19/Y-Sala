@@ -135,6 +135,7 @@
                         android:textColor="@android:color/black" />
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_facilities"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/normal_margin"
