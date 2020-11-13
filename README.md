@@ -12,6 +12,6 @@ Project tugas PPL Y-SALA
 
 - __Yoga Lafrianto__: 20/469213/NPA/19649
 
--__Dwi Anggun__: 20/469209/NPA/19645
+- __Dwi Anggun__: 20/469209/NPA/19645
 
--__Aji Sukron__: 18/426573/EK/21904
+- __Aji Sukron__: 18/426573/EK/21904
