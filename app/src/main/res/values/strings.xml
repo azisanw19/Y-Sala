@@ -25,4 +25,8 @@
     <string name="booking_homestay">Booking Homestay</string>
     <string name="homestay_image">Homestay image</string>
     <string name="details">Details</string>
+
+    <string name="back">Back</string>
+    <string name="booking_now">Booking now</string>
+    <string name="facilities">Facilities</string>
 </resources>
