@@ -1,8 +1,6 @@
 package id.canwar.ysala.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,8 +52,6 @@ class HomestayFragment : Fragment() {
 
                     homestays.add(homestay)
                 }
-
-                Log.e("database retieve", "data")
 
                 val homestayAdapter = HomestayAdapter(view.context, homestays)
                 view.rv_homestay.apply {

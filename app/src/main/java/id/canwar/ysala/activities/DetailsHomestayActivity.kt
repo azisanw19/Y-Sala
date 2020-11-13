@@ -11,7 +11,6 @@ import com.squareup.picasso.Picasso
 import id.canwar.ysala.R
 import id.canwar.ysala.adapters.FacilityAdapter
 import id.canwar.ysala.helpers.*
-import id.canwar.ysala.models.Facility
 import id.canwar.ysala.models.Homestay
 import kotlinx.android.synthetic.main.activity_details_homestay.*
 
@@ -45,14 +44,14 @@ class DetailsHomestayActivity : AppCompatActivity() {
 
     private fun getDataFacilities() {
 
-        val databaseReference = firebaseDatabase.getReference("$FIREBASE_FACILITIES/${homestay!!.id}")
+        val databaseReference = firebaseDatabase.getReference("$FIREBASE_HOMESTAYS/${homestay!!.id}")
 
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val facilities = ArrayList<Facility>()
+                val facilities = ArrayList<String>()
 
-                for (dataSnapshot in snapshot.children) {
-                    facilities.add(dataSnapshot.getValue(Facility::class.java)!!)
+                for (dataSnapshot in snapshot.child(HOMESTAY_FACILITY).children) {
+                    facilities.add(dataSnapshot.getValue(String::class.java)!!)
                 }
 
                 val facilityAdapter = FacilityAdapter(this@DetailsHomestayActivity, facilities)
