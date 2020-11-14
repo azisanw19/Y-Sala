@@ -41,4 +41,7 @@
     <string name="booking">Booking</string>
     <string name="time_pick_up">Time pick-up</string>
     <string name="pick_up_location">Pick-up Location</string>
+    <string name="eat">Eat</string>
+    <string name="address_pick_up">Address Pick-up</string>
+    <string name="select_package">Select Package</string>
 </resources>

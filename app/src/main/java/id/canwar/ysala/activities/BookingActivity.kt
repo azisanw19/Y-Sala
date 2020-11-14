@@ -3,6 +3,7 @@ package id.canwar.ysala.activities
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -70,7 +71,12 @@ class BookingActivity : AppCompatActivity() {
 
         tv_payment.setOnClickListener {
             val payments = resources.getStringArray(R.array.payment_method)
-            setupDialog(payments, tv_payment)
+            setupDialogSingleChoice(payments, tv_payment)
+        }
+
+        tv_eat.setOnClickListener {
+            val eats = resources.getStringArray(R.array.eat_order)
+            setupDialogMultipleChoice(eats, tv_eat)
         }
 
     }
@@ -91,7 +97,7 @@ class BookingActivity : AppCompatActivity() {
         }
     }
 
-    private fun getTotalPayment(chekin: String, checkout: String): Int {
+    private fun getBookingDuration(chekin: String, checkout: String): Int {
 
         val calChekin = chekin.split(" ")
         val dayChekin = calChekin[0].toInt()
@@ -123,7 +129,7 @@ class BookingActivity : AppCompatActivity() {
 
     }
 
-    private fun setupDialog(array: Array<String>, textView: TextView) {
+    private fun setupDialogSingleChoice(array: Array<String>, textView: TextView) {
 
         val choice = array.indexOf(textView.text)
 
@@ -134,6 +140,52 @@ class BookingActivity : AppCompatActivity() {
                 }
                 .create()
                 .show()
+
+    }
+
+    private fun setupDialogMultipleChoice(array: Array<String>, textView: TextView) {
+
+        val checkedArray = getCheckedBoolean(array, textView.text.toString())
+
+        AlertDialog.Builder(this, R.style.DialogTheme)
+                .setMultiChoiceItems(array, checkedArray) {dialog, which, isChecked ->
+                    checkedArray[which] = isChecked
+                }
+                .setPositiveButton("Ok") { dialog, which ->
+                    var eat = ""
+                    for (i in array.indices) {
+
+                        if (checkedArray[i]) {
+                            if (eat == "")
+                                eat += "${array[i]}"
+                            else
+                                eat += " - ${array[i]}"
+                        }
+
+                    }
+                    textView.text = eat
+                    dialog.dismiss()
+                }
+                .setNegativeButton("Cancel") { dialog, which ->
+                    dialog.dismiss()
+                }
+                .create()
+                .show()
+    }
+
+    private fun getCheckedBoolean(array: Array<String>, eat: String): BooleanArray {
+
+        val eats = eat.split(" - ")
+        val checkedArray = booleanArrayOf(false, false, false)
+        for (i in eats) {
+            for (j in array.indices) {
+                if (i == array[j]) {
+                    checkedArray[j] = true
+                }
+            }
+        }
+
+        return checkedArray
 
     }
 
@@ -163,7 +215,7 @@ class BookingActivity : AppCompatActivity() {
                 set(Calendar.YEAR, year)
             }
             textView.text = SimpleDateFormat("dd MMMM yyyy", Locale.US).format(calendar.time)
-            val payment = getTotalPayment(tv_chekin.text.toString(), tv_checkout.text.toString()) * homestay!!.price
+            val payment = getBookingDuration(tv_chekin.text.toString(), tv_checkout.text.toString()) * homestay!!.price
             tv_total_payment.text = "Rp. $payment,00"
         }
 

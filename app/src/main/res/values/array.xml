@@ -5,6 +5,13 @@
         <item>Link Aja</item>
         <item>Dana</item>
         <item>Go Pay</item>
+        <item>Paypal</item>
+    </string-array>
+
+    <string-array name="eat_order">
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
     </string-array>
 
 </resources>
