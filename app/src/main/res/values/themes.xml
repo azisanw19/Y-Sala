@@ -18,4 +18,8 @@
 
     </style>
 
+    <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">#424242</item>
+    </style>
+
 </resources>
