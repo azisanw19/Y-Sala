@@ -90,8 +90,9 @@ class DetailsHomestayActivity : AppCompatActivity() {
         val image = bundle.getString(HOMESTAY_IMAGE)!!
         val address = bundle.getString(HOMESTAY_ADDRESS)!!
         val price = bundle.getInt(HOMESTAY_PRICE)
+        val telephone = bundle.getString(HOMESTAY_TELEPHONE)!!
 
-        homestay = Homestay(id, name, image, address, price)
+        homestay = Homestay(id, name, image, address, price, telephone)
 
         try {
             if (image != "") {

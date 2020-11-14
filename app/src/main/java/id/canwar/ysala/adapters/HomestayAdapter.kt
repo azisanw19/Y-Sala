@@ -54,6 +54,7 @@ class HomestayAdapter(val context: Context, val homestays: ArrayList<Homestay>) 
                         putExtra(HOMESTAY_IMAGE, homestay.image)
                         putExtra(HOMESTAY_ADDRESS, homestay.address)
                         putExtra(HOMESTAY_PRICE, homestay.price)
+                        putExtra(HOMESTAY_TELEPHONE, homestay.telephone)
                     }
 
                     putExtras(bundle)
