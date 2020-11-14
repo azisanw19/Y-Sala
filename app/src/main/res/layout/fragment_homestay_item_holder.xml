@@ -22,6 +22,7 @@
         app:cardElevation="@dimen/normal_margin" >
 
         <LinearLayout
+            android:id="@+id/homestay_placeholder"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="@dimen/small_margin"
@@ -32,9 +33,9 @@
                 android:id="@+id/iv_homestay"
                 android:layout_width="160dp"
                 android:layout_height="160dp"
-                tools:srcCompat="@tools:sample/backgrounds/scenic"
                 android:contentDescription="@string/homestay_image"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -48,39 +49,39 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/normal_margin"
                     android:layout_marginBottom="@dimen/normal_margin"
-                    tools:text="Nyaman di dalam"
-                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
                     android:textSize="@dimen/bigger_text_size"
-                    android:textColor="@android:color/black" />
+                    android:textStyle="bold"
+                    tools:text="Nyaman di dalam" />
 
                 <TextView
                     android:id="@+id/tv_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/smaller_margin"
                     android:layout_below="@id/tv_name"
-                    tools:text="Rp. 150.000,00"
-                    android:textColor="@android:color/black" />
+                    android:layout_marginBottom="@dimen/smaller_margin"
+                    android:textColor="@android:color/black"
+                    tools:text="Rp. 150.000,00" />
 
                 <TextView
                     android:id="@+id/tv_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/normal_margin"
                     android:layout_below="@id/tv_price"
-                    tools:text="Jalan Puncak Indah Rt 09 Rw 02, Bogor, Jawa Barat"
-                    android:textColor="@android:color/black" />
+                    android:layout_marginBottom="@dimen/normal_margin"
+                    android:textColor="@android:color/black"
+                    tools:text="Jalan Puncak Indah Rt 09 Rw 02, Bogor, Jawa Barat" />
 
                 <TextView
                     android:id="@+id/details"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/normal_margin"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/normal_margin"
                     android:text="@string/details"
-                    android:textStyle="italic|bold"
-                    android:textColor="@color/blue_dark" />
+                    android:textColor="@color/blue_dark"
+                    android:textStyle="italic|bold" />
 
             </RelativeLayout>
         </LinearLayout>
