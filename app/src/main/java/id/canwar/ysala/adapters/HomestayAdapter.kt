@@ -44,7 +44,6 @@ class HomestayAdapter(val context: Context, val homestays: ArrayList<Homestay>) 
 
 
             view.homestay_placeholder.setOnClickListener {
-                Log.e("click view", "clicked")
 
                 Intent(it.context, DetailsHomestayActivity::class.java).apply {
                     val bundle = Bundle().apply {
@@ -60,26 +59,6 @@ class HomestayAdapter(val context: Context, val homestays: ArrayList<Homestay>) 
 
                     view.context.startActivity(this)
                 }
-            }
-            view.details.setOnClickListener {
-
-                Log.e("click view", "clicked")
-
-                Intent(it.context, DetailsHomestayActivity::class.java).apply {
-                    val bundle = Bundle().apply {
-                        putExtra(HOMESTAY_ID, homestay.id)
-                        putExtra(HOMESTAY_NAME, homestay.name)
-                        putExtra(HOMESTAY_IMAGE, homestay.image)
-                        putExtra(HOMESTAY_ADDRESS, homestay.address)
-                        putExtra(HOMESTAY_PRICE, homestay.price)
-                        putExtra(HOMESTAY_TELEPHONE, homestay.telephone)
-                    }
-
-                    putExtras(bundle)
-
-                    view.context.startActivity(this)
-                }
-
             }
         }
 

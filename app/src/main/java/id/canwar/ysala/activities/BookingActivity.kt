@@ -7,15 +7,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.widget.addTextChangedListener
 import com.squareup.picasso.Picasso
 import id.canwar.ysala.R
 import id.canwar.ysala.helpers.*
+import id.canwar.ysala.models.Homestay
 import kotlinx.android.synthetic.main.activity_booking.*
 import java.text.SimpleDateFormat
 import java.util.*
 
 class BookingActivity : AppCompatActivity() {
+
+    private var homestay: Homestay? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_booking)
@@ -32,6 +36,8 @@ class BookingActivity : AppCompatActivity() {
 
         tv_chekin.text = date
 
+        tv_total_payment.text = "Rp. 0,00"
+
         tv_chekin.setOnClickListener {
             setupDatePicker(tv_chekin)
         }
@@ -42,12 +48,17 @@ class BookingActivity : AppCompatActivity() {
             setupDatePicker(tv_checkout)
         }
 
-        if (et_pick_up_location.text.toString() != "") {
-            tv_time_text.visibility = View.GONE
-            tv_time.visibility = View.GONE
-        } else {
-            tv_time_text.visibility = View.VISIBLE
-            tv_time.visibility = View.VISIBLE
+        tv_time_text.visibility = View.GONE
+        tv_time.visibility = View.GONE
+
+        et_pick_up_location.addTextChangedListener {
+            if (et_pick_up_location.text.toString() == "") {
+                tv_time_text.visibility = View.GONE
+                tv_time.visibility = View.GONE
+            } else {
+                tv_time_text.visibility = View.VISIBLE
+                tv_time.visibility = View.VISIBLE
+            }
         }
 
         val time = SimpleDateFormat("HH:mm", Locale.US).format(calendar.time)
@@ -62,7 +73,54 @@ class BookingActivity : AppCompatActivity() {
             setupDialog(payments, tv_payment)
         }
 
-        // Add logika hitung harga
+    }
+
+    private fun getMonthString(stringMonth: String): Int {
+        return when (stringMonth) {
+            "January" -> Calendar.JANUARY
+            "February" -> Calendar.FEBRUARY
+            "March" -> Calendar.MARCH
+            "April" -> Calendar.APRIL
+            "May" -> Calendar.MAY
+            "June" -> Calendar.JUNE
+            "July" -> Calendar.JULY
+            "August" -> Calendar.AUGUST
+            "September" -> Calendar.SEPTEMBER
+            "November" -> Calendar.NOVEMBER
+            else -> Calendar.DECEMBER
+        }
+    }
+
+    private fun getTotalPayment(chekin: String, checkout: String): Int {
+
+        val calChekin = chekin.split(" ")
+        val dayChekin = calChekin[0].toInt()
+        val stringMonthChekin = calChekin[1]
+        val yearChekin = calChekin[2].toInt()
+
+        val monthChekin = getMonthString(stringMonthChekin)
+
+        val calendarChekin = Calendar.getInstance().apply {
+            set(yearChekin, monthChekin, dayChekin)
+        }
+
+        val calCheckout = checkout.split(" ")
+        val dayCheckout = calCheckout[0].toInt()
+        val stringMonthCheckout = calCheckout[1]
+        val yearCheckout = calCheckout[2].toInt()
+
+        val monthCheckout = getMonthString(stringMonthCheckout)
+
+        val calendarCheckout = Calendar.getInstance().apply {
+            set(yearCheckout, monthCheckout, dayCheckout)
+        }
+
+        val diff = calendarCheckout.timeInMillis - calendarChekin.timeInMillis
+        val diffDays = diff / (24 * 60 * 60 * 1000)
+
+
+        return diffDays.toInt()
+
     }
 
     private fun setupDialog(array: Array<String>, textView: TextView) {
@@ -105,6 +163,8 @@ class BookingActivity : AppCompatActivity() {
                 set(Calendar.YEAR, year)
             }
             textView.text = SimpleDateFormat("dd MMMM yyyy", Locale.US).format(calendar.time)
+            val payment = getTotalPayment(tv_chekin.text.toString(), tv_checkout.text.toString()) * homestay!!.price
+            tv_total_payment.text = "Rp. $payment,00"
         }
 
         DatePickerDialog(this, R.style.DialogTheme, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
@@ -119,6 +179,8 @@ class BookingActivity : AppCompatActivity() {
         val address = bundle.getString(HOMESTAY_ADDRESS)!!
         val price = bundle.getInt(HOMESTAY_PRICE)
         val telephone = bundle.getString(HOMESTAY_TELEPHONE)!!
+
+        homestay = Homestay(id, name, image, address, price, telephone)
 
         try {
             if (image != "") {

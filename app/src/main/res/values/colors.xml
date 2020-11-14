@@ -18,6 +18,7 @@
     <color name="cardColorBookingHeading">#E055959A</color>
     <color name="cardColorBookingInput">#FF8159</color>
     <color name="cardColorBookingInputTv">#FCCD95</color>
+    <color name="dialogColor">#424242</color>
 
     <color name="md_green_100_dark">#ACDAAE</color>
     <color name="md_green_200_dark">#89CA8D</color>

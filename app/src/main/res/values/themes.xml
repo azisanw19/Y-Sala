@@ -19,7 +19,7 @@
     </style>
 
     <style name="DialogTheme" parent="Theme.AppCompat.Dialog">
-        <item name="android:windowBackground">#424242</item>
+        <item name="android:windowBackground">@color/dialogColor</item>
     </style>
 
 </resources>
