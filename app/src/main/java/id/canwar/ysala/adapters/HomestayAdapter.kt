@@ -42,7 +42,7 @@ class HomestayAdapter(val context: Context, val homestays: ArrayList<Homestay>) 
 
             }
 
-            // bug view tidak bisa click
+
             view.homestay_placeholder.setOnClickListener {
                 Log.e("click view", "clicked")
 
