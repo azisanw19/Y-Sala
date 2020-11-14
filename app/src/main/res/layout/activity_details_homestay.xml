@@ -17,7 +17,7 @@
             android:layout_marginTop="@dimen/normal_margin"
             android:layout_marginStart="@dimen/normal_margin"
             android:layout_marginEnd="@dimen/normal_margin"
-            android:text="@string/booking_homestay"
+            android:text="@string/details_homestay"
             android:textStyle="bold"
             android:textSize="@dimen/actionbar_text_size"
             android:textColor="@android:color/black" />
@@ -62,8 +62,7 @@
                 android:layout_marginTop="-50dp"
                 android:layout_marginStart="@dimen/normal_margin"
                 android:layout_marginEnd="@dimen/normal_margin"
-                android:foreground="?attr/selectableItemBackground"
-                android:clickable="true"
+                android:clickable="false"
                 android:focusable="true"
                 app:cardBackgroundColor="@color/cardColor"
                 app:cardCornerRadius="@dimen/normal_margin"
@@ -83,6 +82,7 @@
                         android:layout_marginStart="@dimen/normal_margin"
                         android:layout_marginEnd="@dimen/normal_margin"
                         tools:text="Imutku tapi nyaman"
+                        android:textStyle="bold"
                         android:textSize="@dimen/actionbar_text_size"
                         android:textColor="@android:color/black" />
 

@@ -29,4 +29,14 @@
     <string name="back">Back</string>
     <string name="booking_now">Booking now</string>
     <string name="facilities">Facilities</string>
+    <string name="details_homestay">Details Homestay</string>
+    <string name="night">/ Night</string>
+    <string name="date_chekin">Date Chekin</string>
+    <string name="date_checkout">Date Checkout</string>
+    <string name="pick_up_service">Pick-up Service</string>
+    <string name="none">None</string>
+    <string name="payment_method">Payment Method</string>
+    <string name="paypal">Paypal</string>
+    <string name="total">Total :</string>
+    <string name="booking">Booking</string>
 </resources>
