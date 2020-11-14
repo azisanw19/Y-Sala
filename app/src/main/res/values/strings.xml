@@ -39,4 +39,5 @@
     <string name="paypal">Paypal</string>
     <string name="total">Total :</string>
     <string name="booking">Booking</string>
+    <string name="time_pick_up">Time pick-up</string>
 </resources>
