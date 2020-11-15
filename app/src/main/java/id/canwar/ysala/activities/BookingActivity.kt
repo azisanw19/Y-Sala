@@ -154,7 +154,7 @@ class BookingActivity : AppCompatActivity() {
         val hourIn = timeIn[0].toInt()
         val minuteIn = timeIn[1].toInt()
 
-        val calendar = Calendar.getInstance().apply {
+        val calendarCheckin = Calendar.getInstance().apply {
             set(yearIn, monthIn, dayIn, hourIn, minuteIn)
         }
 
@@ -162,15 +162,17 @@ class BookingActivity : AppCompatActivity() {
         val dayOut = checkout[0].toInt()
         val monthOut = getMonthInt(checkout[1])
         val yearOut = checkout[2].toInt()
-        calendar.set(yearOut, monthOut, dayOut)
+        val calendarCheckout = Calendar.getInstance().apply {
+            set(yearOut, monthOut, dayOut)
+        }
 
         val uid = databaseReferenceBooking.push().key!!
         val homestayID = homestay!!.id
         val userId = firebaseAuth.currentUser!!.uid
         val timerOrder = calendarOrder.time
         // Waktu chekin adalah waktu penjemputan jika ada lokasi penjemputan
-        val timeChekin = calendar.time
-        val timeCheckout = calendar.time
+        val timeChekin = calendarCheckin.time
+        val timeCheckout = calendarCheckout.time
         var eat: String? = tv_eat.text.toString()
         if (eat == resources.getString(R.string.select_package))
             eat = null

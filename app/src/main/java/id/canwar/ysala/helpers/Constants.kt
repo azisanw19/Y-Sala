@@ -11,7 +11,7 @@ const val DP_PERCENT = 30
 const val FIREBASE_USERS = "users"
 const val FIREBASE_HOMESTAYS = "homestays"
 const val FIREBASE_BOOKING = "booking"
-const val FIREBASE_PAYMENT = "PAYMENT"
+const val FIREBASE_PAYMENT = "payment"
 
 /** For passing data **/
 const val HOMESTAY_ID = "homestay_id"

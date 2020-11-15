@@ -1,9 +1,22 @@
 package id.canwar.ysala.helpers
 
 import id.canwar.ysala.models.Eat
+import java.text.SimpleDateFormat
 import java.util.*
 
 object Formatter {
+
+    fun getTimeFromTime(date: Date): String {
+
+        return SimpleDateFormat("HH:mm", Locale.US).format(date).toString()
+
+    }
+
+    fun getDateFromDate(date: Date): String {
+
+        return SimpleDateFormat("dd MMMM yyyy", Locale.US).format(date).toString()
+
+    }
 
     fun getCostEat(price: Eat, food: String, durationDay: Int): Int {
 

@@ -16,7 +16,6 @@ import id.canwar.ysala.models.Eat
 import id.canwar.ysala.models.Payment
 import id.canwar.ysala.models.User
 import kotlinx.android.synthetic.main.activity_details_payment.*
-import kotlinx.android.synthetic.main.fragment_homestay_item_holder.view.*
 import java.util.*
 
 class DetailsPaymentActivity : AppCompatActivity() {

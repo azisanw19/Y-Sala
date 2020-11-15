@@ -16,7 +16,7 @@
         android:textColor="@android:color/black" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_homestay"
+        android:id="@+id/rv_history"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/normal_margin"
