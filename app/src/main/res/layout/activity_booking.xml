@@ -276,31 +276,6 @@
                         android:layout_marginTop="@dimen/normal_margin"
                         android:layout_marginStart="@dimen/normal_margin"
                         android:layout_marginEnd="@dimen/normal_margin"
-                        android:text="@string/eat"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black" />
-
-                    <TextView
-                        android:id="@+id/tv_eat"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/normal_margin"
-                        android:layout_marginEnd="@dimen/normal_margin"
-                        android:background="@drawable/round_input_booking"
-                        android:paddingStart="@dimen/activity_margin"
-                        android:paddingTop="@dimen/small_margin"
-                        android:paddingBottom="@dimen/small_margin"
-                        android:paddingEnd="@dimen/activity_margin"
-                        android:text="@string/select_package"
-                        android:textSize="@dimen/normal_text_size"
-                        android:textColor="@android:color/black" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/normal_margin"
-                        android:layout_marginStart="@dimen/normal_margin"
-                        android:layout_marginEnd="@dimen/normal_margin"
                         android:text="@string/number_of_people"
                         android:textSize="@dimen/normal_text_size"
                         android:textColor="@android:color/black" />
@@ -321,6 +296,30 @@
                         android:textColor="@android:color/black"
                         android:inputType="number" />
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/normal_margin"
+                        android:layout_marginStart="@dimen/normal_margin"
+                        android:layout_marginEnd="@dimen/normal_margin"
+                        android:text="@string/eat"
+                        android:textSize="@dimen/normal_text_size"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/tv_eat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/normal_margin"
+                        android:layout_marginEnd="@dimen/normal_margin"
+                        android:background="@drawable/round_input_booking"
+                        android:paddingStart="@dimen/activity_margin"
+                        android:paddingTop="@dimen/small_margin"
+                        android:paddingBottom="@dimen/small_margin"
+                        android:paddingEnd="@dimen/activity_margin"
+                        android:text="@string/select_package"
+                        android:textSize="@dimen/normal_text_size"
+                        android:textColor="@android:color/black" />
 
                     <TextView
                         android:layout_width="wrap_content"

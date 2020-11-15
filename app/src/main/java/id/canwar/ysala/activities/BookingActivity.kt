@@ -164,14 +164,14 @@ class BookingActivity : AppCompatActivity() {
         val yearOut = checkout[2].toInt()
         calendar.set(yearOut, monthOut, dayOut)
 
-        val uid = databaseReferenceBooking.key!!
+        val uid = databaseReferenceBooking.push().key!!
         val homestayID = homestay!!.id
         val userId = firebaseAuth.currentUser!!.uid
         val timerOrder = calendarOrder.time
         // Waktu chekin adalah waktu penjemputan jika ada lokasi penjemputan
         val timeChekin = calendar.time
         val timeCheckout = calendar.time
-        var eat: String? = tv_eat.toString()
+        var eat: String? = tv_eat.text.toString()
         if (eat == resources.getString(R.string.select_package))
             eat = null
         var peopleString = et_people.text.toString()
@@ -192,13 +192,15 @@ class BookingActivity : AppCompatActivity() {
 
     private fun calculatePayment(durationBooking: Int, eatTotalOneDay: Int){
 
+        Log.e("total eat", "$eatTotalOneDay")
+
         val numberOfPerson = if (et_people.text.toString() == "") 0 else et_people.text.toString().toInt()
 
         val homestayPrice = durationBooking * homestay!!.price
         val eatTotalPrice = eatTotalOneDay * durationBooking * numberOfPerson
 
         total = homestayPrice + eatTotalPrice
-        dp = total / DP_PERCENT
+        dp = total * DP_PERCENT/100
 
         tv_dp_payment.text = "DP: Rp. $dp,00"
         tv_total_payment.text = "Rp. $total,00"

@@ -125,7 +125,7 @@ class DetailsPaymentActivity : AppCompatActivity() {
             ll_booking_eat_total.visibility = View.VISIBLE
             tv_eat_order.text = "$eatOrder for ${person} persons"
             costEat = Formatter.getCostEat(eat, eatOrder, duration)
-            tv_booking_eat_total.text = "Rp. ${eatOrder},00"
+            tv_booking_eat_total.text = "Rp. ${costEat},00"
         }
 
         tv_payment_method.text = bundle.getString(BOOKING_PAYMENT_METHOD)
@@ -133,7 +133,7 @@ class DetailsPaymentActivity : AppCompatActivity() {
         val total = costHomestay + costEat
         tv_payment_total.text = "Rp. $total,00"
 
-        val dp = total/ DP_PERCENT
+        val dp = total * DP_PERCENT/100
         tv_dp_payment.text = "Rp. $dp,00"
 
         btn_pay_dp.setOnClickListener{
@@ -143,6 +143,7 @@ class DetailsPaymentActivity : AppCompatActivity() {
 
         btn_pay_total.setOnClickListener{
             pushDataPayment(bookingId!!, total, total)
+            finish()
         }
     }
 
