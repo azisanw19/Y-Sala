@@ -3,23 +3,35 @@ package id.canwar.ysala.activities
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import id.canwar.ysala.R
 import id.canwar.ysala.helpers.*
+import id.canwar.ysala.models.Eat
 import id.canwar.ysala.models.Homestay
 import kotlinx.android.synthetic.main.activity_booking.*
+import kotlinx.android.synthetic.main.activity_booking.iv_homestay
+import kotlinx.android.synthetic.main.activity_booking.tv_address
+import kotlinx.android.synthetic.main.activity_booking.tv_name
+import kotlinx.android.synthetic.main.activity_booking.tv_price
 import java.text.SimpleDateFormat
 import java.util.*
 
 class BookingActivity : AppCompatActivity() {
 
     private var homestay: Homestay? = null
+    private var eatPrice: Eat? = null
+    private val firebaseDatabase = FirebaseDatabase.getInstance()
+    private var total = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +43,11 @@ class BookingActivity : AppCompatActivity() {
     private fun initUI() {
 
         getDataIntent(intent.extras!!)
+        getEatPrice()
+
+        tv_back.setOnClickListener {
+            finish()
+        }
 
         val calendar = Calendar.getInstance()
         val date = SimpleDateFormat("dd MMMM yyyy", Locale.US).format(calendar.time)
@@ -75,10 +92,57 @@ class BookingActivity : AppCompatActivity() {
         }
 
         tv_eat.setOnClickListener {
-            val eats = resources.getStringArray(R.array.eat_order)
+            val eats = arrayOf("Breakfast Rp. ${eatPrice?.breakfast}", "Lunch Rp. ${eatPrice?.lunch}", "Dinner Rp. ${eatPrice?.dinner}")
             setupDialogMultipleChoice(eats, tv_eat)
         }
 
+    }
+
+    private fun calculatePayment(durationBooking: Int, eatTotalOneDay: Int){
+
+        val homestayPrice = durationBooking * homestay!!.price
+        val eatTotalPrice = eatTotalOneDay * durationBooking
+
+        total = homestayPrice + eatTotalPrice
+
+        tv_total_payment.text = "Rp. $total,00"
+    }
+
+    private fun calculateEatPrice(): Int {
+
+        val eat = tv_eat.text.toString().split(" & ")
+
+        var total = 0
+
+        for (i in eat) {
+            total += when (i) {
+                "Breakfast" -> eatPrice?.breakfast ?: 0
+                "Lunch" -> eatPrice?.lunch ?: 0
+                "Dinner" -> eatPrice?.dinner ?: 0
+                else -> 0
+            }
+        }
+
+        return total
+
+    }
+
+    private fun getEatPrice() {
+
+        val databaseReference = firebaseDatabase.getReference("$FIREBASE_HOMESTAYS/${homestay!!.id}/$HOMESTAY_EAT_PRICE")
+
+        databaseReference.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                eatPrice = snapshot.getValue(Eat::class.java)
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
     }
 
     private fun getMonthString(stringMonth: String): Int {
@@ -145,7 +209,7 @@ class BookingActivity : AppCompatActivity() {
 
     private fun setupDialogMultipleChoice(array: Array<String>, textView: TextView) {
 
-        val checkedArray = getCheckedBoolean(array, textView.text.toString())
+        val checkedArray = getCheckedBoolean(textView.text.toString())
 
         AlertDialog.Builder(this, R.style.DialogTheme)
                 .setMultiChoiceItems(array, checkedArray) {dialog, which, isChecked ->
@@ -156,14 +220,21 @@ class BookingActivity : AppCompatActivity() {
                     for (i in array.indices) {
 
                         if (checkedArray[i]) {
-                            if (eat == "")
-                                eat += "${array[i]}"
-                            else
-                                eat += " - ${array[i]}"
+                            try {
+                                val temp = array[i].split(" Rp. ")[0]
+                                eat += if (eat == "")
+                                    temp
+                                else
+                                    " & $temp"
+                            }
+                            catch (e: Exception) {
+                                Log.e("Error", e.toString())
+                            }
                         }
 
                     }
                     textView.text = eat
+                    calculatePayment(getBookingDuration(tv_chekin.text.toString(), tv_checkout.text.toString()), calculateEatPrice())
                     dialog.dismiss()
                 }
                 .setNegativeButton("Cancel") { dialog, which ->
@@ -173,9 +244,11 @@ class BookingActivity : AppCompatActivity() {
                 .show()
     }
 
-    private fun getCheckedBoolean(array: Array<String>, eat: String): BooleanArray {
+    private fun getCheckedBoolean(eat: String): BooleanArray {
 
-        val eats = eat.split(" - ")
+        val array = arrayOf("Breakfast, Lunch, Dinner")
+
+        val eats = eat.split(" & ")
         val checkedArray = booleanArrayOf(false, false, false)
         for (i in eats) {
             for (j in array.indices) {
@@ -215,8 +288,7 @@ class BookingActivity : AppCompatActivity() {
                 set(Calendar.YEAR, year)
             }
             textView.text = SimpleDateFormat("dd MMMM yyyy", Locale.US).format(calendar.time)
-            val payment = getBookingDuration(tv_chekin.text.toString(), tv_checkout.text.toString()) * homestay!!.price
-            tv_total_payment.text = "Rp. $payment,00"
+            calculatePayment(getBookingDuration(tv_chekin.text.toString(), tv_checkout.text.toString()), calculateEatPrice())
         }
 
         DatePickerDialog(this, R.style.DialogTheme, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show()
@@ -246,8 +318,6 @@ class BookingActivity : AppCompatActivity() {
         tv_address.text = address
         tv_telephone.text = telephone
         tv_price.text = "Rp. $price,00 / Night"
-
-
 
     }
 }
