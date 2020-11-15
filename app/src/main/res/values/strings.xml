@@ -44,4 +44,9 @@
     <string name="eat">Eat</string>
     <string name="address_pick_up">Address Pick-up</string>
     <string name="select_package">Select Package</string>
+    <string name="details_payment">Details Payment</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="check_in">Check-in</string>
+    <string name="check_out">Check-out</string>
 </resources>

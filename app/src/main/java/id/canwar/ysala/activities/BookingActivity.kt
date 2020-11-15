@@ -104,6 +104,9 @@ class BookingActivity : AppCompatActivity() {
 
         btn_booking.setOnClickListener{
             pushDataBooking()
+            // intent ke Details pembayaran ada pilihan bayar DP atau bayar total
+            finish()
+            
         }
 
     }
@@ -149,8 +152,6 @@ class BookingActivity : AppCompatActivity() {
         val booking = Booking(uid, homestayID, userId, timerOrder, timeChekin, timeCheckout, eat, locationPickUp)
 
         databaseReferenceBooking.child(uid).setValue(booking)
-
-        val databaseReferencePayment = firebaseDatabase.getReference(FIREBASE_PAYMENT)
 
     }
 

@@ -50,6 +50,7 @@ class DetailsHomestayActivity : AppCompatActivity() {
 
                 startActivity(this)
             }
+            finish()
         }
 
         getDataFacilities()
