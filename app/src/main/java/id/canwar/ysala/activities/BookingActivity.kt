@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -16,6 +17,7 @@ import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import id.canwar.ysala.R
 import id.canwar.ysala.helpers.*
+import id.canwar.ysala.models.Booking
 import id.canwar.ysala.models.Eat
 import id.canwar.ysala.models.Homestay
 import kotlinx.android.synthetic.main.activity_booking.*
@@ -28,10 +30,14 @@ import java.util.*
 
 class BookingActivity : AppCompatActivity() {
 
+    private val firebaseDatabase = FirebaseDatabase.getInstance()
+    private val firebaseAuth = FirebaseAuth.getInstance()
+
     private var homestay: Homestay? = null
     private var eatPrice: Eat? = null
-    private val firebaseDatabase = FirebaseDatabase.getInstance()
     private var total = 0
+    private var dp = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,15 +102,69 @@ class BookingActivity : AppCompatActivity() {
             setupDialogMultipleChoice(eats, tv_eat)
         }
 
+        btn_booking.setOnClickListener{
+            pushDataBooking()
+        }
+
+    }
+
+    private fun pushDataBooking() {
+
+        val databaseReferenceBooking = firebaseDatabase.getReference(FIREBASE_BOOKING)
+        val calendarOrder = Calendar.getInstance()
+
+        val chekIn = tv_chekin.text.toString().split(" ")
+        val timeIn = tv_time.text.toString().split(":")
+        val dayIn = chekIn[0].toInt()
+        val monthIn = getMonthInt(chekIn[1])
+        val yearIn = chekIn[2].toInt()
+        val hourIn = timeIn[0].toInt()
+        val minuteIn = timeIn[1].toInt()
+
+        val calendar = Calendar.getInstance().apply {
+            set(yearIn, monthIn, dayIn, hourIn, minuteIn)
+        }
+
+        val checkout = tv_checkout.text.toString().split(" ")
+        val dayOut = checkout[0].toInt()
+        val monthOut = getMonthInt(checkout[1])
+        val yearOut = checkout[2].toInt()
+        calendar.set(yearOut, monthOut, dayOut)
+
+        val uid = databaseReferenceBooking.key!!
+        val homestayID = homestay!!.id
+        val userId = firebaseAuth.currentUser!!.uid
+        val timerOrder = calendarOrder.time
+        // Waktu chekin adalah waktu penjemputan jika ada lokasi penjemputan
+        val timeChekin = calendar.time
+        val timeCheckout = calendar.time
+        var eat: String? = tv_eat.toString()
+        if (eat == resources.getString(R.string.select_package))
+            eat = null
+        var locationPickUp: String? = et_pick_up_location.text.toString()
+        if (locationPickUp == "")
+            locationPickUp = null
+
+
+        val booking = Booking(uid, homestayID, userId, timerOrder, timeChekin, timeCheckout, eat, locationPickUp)
+
+        databaseReferenceBooking.child(uid).setValue(booking)
+
+        val databaseReferencePayment = firebaseDatabase.getReference(FIREBASE_PAYMENT)
+
     }
 
     private fun calculatePayment(durationBooking: Int, eatTotalOneDay: Int){
+
+        val percentage = 30
 
         val homestayPrice = durationBooking * homestay!!.price
         val eatTotalPrice = eatTotalOneDay * durationBooking
 
         total = homestayPrice + eatTotalPrice
+        dp = total / percentage
 
+        tv_dp_payment.text = "DP: Rp. $dp,00"
         tv_total_payment.text = "Rp. $total,00"
     }
 
@@ -145,7 +205,7 @@ class BookingActivity : AppCompatActivity() {
         })
     }
 
-    private fun getMonthString(stringMonth: String): Int {
+    private fun getMonthInt(stringMonth: String): Int {
         return when (stringMonth) {
             "January" -> Calendar.JANUARY
             "February" -> Calendar.FEBRUARY
@@ -168,7 +228,7 @@ class BookingActivity : AppCompatActivity() {
         val stringMonthChekin = calChekin[1]
         val yearChekin = calChekin[2].toInt()
 
-        val monthChekin = getMonthString(stringMonthChekin)
+        val monthChekin = getMonthInt(stringMonthChekin)
 
         val calendarChekin = Calendar.getInstance().apply {
             set(yearChekin, monthChekin, dayChekin)
@@ -179,7 +239,7 @@ class BookingActivity : AppCompatActivity() {
         val stringMonthCheckout = calCheckout[1]
         val yearCheckout = calCheckout[2].toInt()
 
-        val monthCheckout = getMonthString(stringMonthCheckout)
+        val monthCheckout = getMonthInt(stringMonthCheckout)
 
         val calendarCheckout = Calendar.getInstance().apply {
             set(yearCheckout, monthCheckout, dayCheckout)

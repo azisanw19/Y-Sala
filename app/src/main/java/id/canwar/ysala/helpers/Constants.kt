@@ -6,7 +6,8 @@ const val END_RUPIAH = ",00"
 
 const val FIREBASE_USERS = "users"
 const val FIREBASE_HOMESTAYS = "homestays"
-
+const val FIREBASE_BOOKING = "booking"
+const val FIREBASE_PAYMENT = "PAYMENT"
 
 /** For passing data **/
 const val HOMESTAY_ID = "homestay_id"
