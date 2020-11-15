@@ -55,4 +55,6 @@
     <string name="dp">DP</string>
     <string name="pay_dp">Pay DP</string>
     <string name="pay_total">Pay total</string>
+    <string name="your_booking">Your Booking</string>
+    <string name="bill">Bill</string>
 </resources>
