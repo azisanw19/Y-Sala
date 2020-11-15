@@ -10,4 +10,5 @@ data class Booking(val id: String = "",
                    val timeCheckOut: Date = Date(),
                    val eat: String? = null,
                    val numberOfPeople: Int = 0,
-                   val locationPickUp: String? = null)
+                   val locationPickUp: String? = null,
+                   val paymentMethod: String = "")

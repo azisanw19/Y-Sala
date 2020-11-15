@@ -62,6 +62,7 @@ class BookingActivity : AppCompatActivity() {
         tv_chekin.text = date
 
         tv_total_payment.text = "Rp. 0,00"
+        tv_dp_payment.text = "Rp. 0,00"
 
         tv_chekin.setOnClickListener {
             setupDatePicker(tv_chekin)
@@ -104,9 +105,35 @@ class BookingActivity : AppCompatActivity() {
         }
 
         btn_booking.setOnClickListener{
-//            pushDataBooking()
+            val booking = pushDataBooking()
             // intent ke Details pembayaran ada pilihan bayar DP atau bayar total
-            val intent = Intent(this, DetailsPaymentActivity::class.java)
+            val intent = Intent(this, DetailsPaymentActivity::class.java).apply {
+                val bundle = Bundle().apply {
+
+                    putExtra(HOMESTAY_ID, homestay!!.id)
+                    putExtra(HOMESTAY_NAME, homestay!!.name)
+                    putExtra(HOMESTAY_IMAGE, homestay!!.image)
+                    putExtra(HOMESTAY_ADDRESS, homestay!!.address)
+                    putExtra(HOMESTAY_PRICE, homestay!!.price)
+                    putExtra(HOMESTAY_TELEPHONE, homestay!!.telephone)
+
+                    putExtra(EAT_BREAKFAST, eatPrice!!.breakfast)
+                    putExtra(EAT_LUNCH, eatPrice!!.lunch)
+                    putExtra(EAT_DINNER, eatPrice!!.dinner)
+
+                    putExtra(BOOKING_ID, booking.id)
+                    putExtra(BOOKING_TIME, booking.timeOrder)
+                    putExtra(BOOKING_CHEKIN, tv_chekin.text.toString())
+                    putExtra(BOOKING_CHECKOUT, tv_checkout.text.toString())
+                    putExtra(BOOKING_TIME_PICK, tv_time.text.toString())
+                    putExtra(BOOKING_EAT, booking.eat)
+                    putExtra(BOOKING_PEOPLE, booking.numberOfPeople)
+                    putExtra(BOOKING_LOCATION, booking.locationPickUp)
+                    putExtra(BOOKING_PAYMENT_METHOD, booking.paymentMethod)
+                }
+
+                putExtras(bundle)
+            }
             startActivity(intent)
             finish()
 
@@ -114,7 +141,7 @@ class BookingActivity : AppCompatActivity() {
 
     }
 
-    private fun pushDataBooking() {
+    private fun pushDataBooking(): Booking {
 
         val databaseReferenceBooking = firebaseDatabase.getReference(FIREBASE_BOOKING)
         val calendarOrder = Calendar.getInstance()
@@ -147,28 +174,31 @@ class BookingActivity : AppCompatActivity() {
         var eat: String? = tv_eat.toString()
         if (eat == resources.getString(R.string.select_package))
             eat = null
-        val people = et_people.text.toString().toInt()
+        var peopleString = et_people.text.toString()
+        val people = if (peopleString == "") 0 else peopleString.toInt()
         var locationPickUp: String? = et_pick_up_location.text.toString()
         if (locationPickUp == "")
             locationPickUp = null
+        val paymentMethod = tv_payment.text.toString()
 
 
-        val booking = Booking(uid, homestayID, userId, timerOrder, timeChekin, timeCheckout, eat, people, locationPickUp)
+        val booking = Booking(uid, homestayID, userId, timerOrder, timeChekin, timeCheckout, eat, people, locationPickUp, paymentMethod)
 
         databaseReferenceBooking.child(uid).setValue(booking)
+
+        return booking
 
     }
 
     private fun calculatePayment(durationBooking: Int, eatTotalOneDay: Int){
 
-        val percentage = 30
         val numberOfPerson = if (et_people.text.toString() == "") 0 else et_people.text.toString().toInt()
 
         val homestayPrice = durationBooking * homestay!!.price
         val eatTotalPrice = eatTotalOneDay * durationBooking * numberOfPerson
 
         total = homestayPrice + eatTotalPrice
-        dp = total / percentage
+        dp = total / DP_PERCENT
 
         tv_dp_payment.text = "DP: Rp. $dp,00"
         tv_total_payment.text = "Rp. $total,00"
