@@ -49,4 +49,10 @@
     <string name="phone">Phone</string>
     <string name="check_in">Check-in</string>
     <string name="check_out">Check-out</string>
+    <string name="free">Free</string>
+    <string name="number_of_people">Number of people</string>
+    <string name="_0_if_no_pick_up_and_no_eat">0 if no Pick-up and no Eat</string>
+    <string name="dp">DP</string>
+    <string name="pay_dp">Pay DP</string>
+    <string name="pay_total">Pay total</string>
 </resources>

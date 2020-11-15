@@ -3,6 +3,7 @@ package id.canwar.ysala.activities
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -103,10 +104,12 @@ class BookingActivity : AppCompatActivity() {
         }
 
         btn_booking.setOnClickListener{
-            pushDataBooking()
+//            pushDataBooking()
             // intent ke Details pembayaran ada pilihan bayar DP atau bayar total
+            val intent = Intent(this, DetailsPaymentActivity::class.java)
+            startActivity(intent)
             finish()
-            
+
         }
 
     }
@@ -144,12 +147,13 @@ class BookingActivity : AppCompatActivity() {
         var eat: String? = tv_eat.toString()
         if (eat == resources.getString(R.string.select_package))
             eat = null
+        val people = et_people.text.toString().toInt()
         var locationPickUp: String? = et_pick_up_location.text.toString()
         if (locationPickUp == "")
             locationPickUp = null
 
 
-        val booking = Booking(uid, homestayID, userId, timerOrder, timeChekin, timeCheckout, eat, locationPickUp)
+        val booking = Booking(uid, homestayID, userId, timerOrder, timeChekin, timeCheckout, eat, people, locationPickUp)
 
         databaseReferenceBooking.child(uid).setValue(booking)
 
@@ -158,9 +162,10 @@ class BookingActivity : AppCompatActivity() {
     private fun calculatePayment(durationBooking: Int, eatTotalOneDay: Int){
 
         val percentage = 30
+        val numberOfPerson = if (et_people.text.toString() == "") 0 else et_people.text.toString().toInt()
 
         val homestayPrice = durationBooking * homestay!!.price
-        val eatTotalPrice = eatTotalOneDay * durationBooking
+        val eatTotalPrice = eatTotalOneDay * durationBooking * numberOfPerson
 
         total = homestayPrice + eatTotalPrice
         dp = total / percentage
