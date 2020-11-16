@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<ScrollView android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:fillViewport="true">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
 
     <TextView
@@ -40,14 +43,21 @@
         app:layout_constraintStart_toStartOf="@+id/profile_emailaddress"
         app:layout_constraintTop_toBottomOf="@+id/profile_emailaddress" />
 
-    <ImageView
+    <EditText
         android:id="@+id/edit_phone"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintEnd_toEndOf="@+id/edit_email"
-        app:layout_constraintTop_toBottomOf="@+id/edit_email"
-        app:srcCompat="@drawable/ic_baseline_edit" />
+        android:layout_width="251dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_input_booking"
+        android:paddingStart="@dimen/activity_margin"
+        android:paddingTop="@dimen/small_margin"
+        android:paddingEnd="@dimen/activity_margin"
+
+        android:paddingBottom="@dimen/small_margin"
+        app:layout_constraintEnd_toEndOf="@id/edit_email"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/edit_email"
+        app:layout_constraintTop_toBottomOf="@id/edit_email" />
 
     <ImageView
         android:id="@+id/icon_email"
@@ -70,14 +80,20 @@
         app:layout_constraintTop_toTopOf="@+id/profile_phonenumber"
         app:srcCompat="@drawable/ic_telephone" />
 
-    <ImageView
+    <EditText
         android:id="@+id/edit_name"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:layout_marginBottom="44dp"
-        app:layout_constraintBottom_toTopOf="@+id/edit_email"
-        app:layout_constraintEnd_toEndOf="@+id/edit_email"
-        app:srcCompat="@drawable/ic_baseline_edit" />
+        android:layout_width="250dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/round_input_booking"
+
+        android:paddingStart="@dimen/activity_margin"
+        android:paddingTop="@dimen/small_margin"
+        android:paddingEnd="@dimen/activity_margin"
+        android:paddingBottom="@dimen/small_margin"
+        app:layout_constraintStart_toStartOf="@id/picture_placeholder"
+        app:layout_constraintTop_toBottomOf="@id/picture_placeholder" />
 
     <ImageView
         android:id="@+id/icon_profile"
@@ -102,21 +118,26 @@
         android:paddingTop="@dimen/small_margin"
         android:paddingEnd="@dimen/activity_margin"
         android:paddingBottom="@dimen/small_margin"
-        android:text="@string/full_name"
+
         app:layout_constraintEnd_toEndOf="@+id/profile_change_text"
         app:layout_constraintStart_toStartOf="@id/picture_placeholder"
         app:layout_constraintTop_toBottomOf="@id/picture_placeholder" />
 
-    <ImageView
+    <EditText
         android:id="@+id/edit_email"
-        android:layout_width="25dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/profile_emailaddress"
-        app:layout_constraintStart_toEndOf="@+id/profile_emailaddress"
-        app:layout_constraintTop_toTopOf="@+id/profile_emailaddress"
-        app:layout_constraintVertical_bias="0.454"
-        app:srcCompat="@drawable/ic_baseline_edit" />
+        android:layout_width="254dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/round_input_booking"
+        android:paddingStart="@dimen/activity_margin"
+
+        android:paddingTop="@dimen/small_margin"
+        android:paddingEnd="@dimen/activity_margin"
+        android:paddingBottom="@dimen/small_margin"
+        app:layout_constraintEnd_toEndOf="@id/edit_name"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@id/edit_name"
+        app:layout_constraintTop_toBottomOf="@id/edit_name" />
 
 
     <ImageView
@@ -188,7 +209,9 @@
         android:paddingTop="@dimen/small_margin"
         android:paddingEnd="@dimen/activity_margin"
         android:text="@string/confirm"
-        app:layout_constraintEnd_toEndOf="@+id/profile_phonenumber"
-        app:layout_constraintTop_toBottomOf="@+id/profile_phonenumber" />
+        app:layout_constraintEnd_toEndOf="@id/edit_phone"
+        app:layout_constraintTop_toBottomOf="@id/edit_phone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

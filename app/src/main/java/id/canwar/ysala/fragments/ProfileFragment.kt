@@ -1,5 +1,6 @@
 package id.canwar.ysala.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import id.canwar.ysala.R
+import id.canwar.ysala.activities.SignInActivity
 import id.canwar.ysala.helpers.FIREBASE_USERS
 import id.canwar.ysala.models.User
 import kotlinx.android.synthetic.main.fragment_profile.view.*
@@ -44,33 +46,60 @@ class ProfileFragment : Fragment() {
             //Send to Storage
         }
 
-        //To change user info(Only enable edit icon)
+        //To change user info(enable edit text)
         view.profile_change_info.setOnClickListener{
+            //Disable Icon:
+            view.icon_email.visibility=View.GONE
+            view.icon_profile.visibility=View.GONE
+            view.icon_phone.visibility=View.GONE
+
             view.profile_change_info.visibility=View.GONE
             view.profile_change_text.visibility=View.GONE
+            //Disable TextView
+            view.profile_fullname.visibility=View.GONE
+            view.profile_emailaddress.visibility=View.GONE
+            view.profile_phonenumber.visibility=View.GONE
 
+            //Get
+            view.edit_name.hint = user?.fullName.toString()
+            view.edit_email.hint = user?.email.toString()
+            view.edit_phone.hint = user?.phone.toString()
+
+            //Enable Edit
             view.edit_name.visibility=View.VISIBLE
             view.edit_email.visibility=View.VISIBLE
             view.edit_phone.visibility=View.VISIBLE
             view.confirm_info_edit.visibility=View.VISIBLE
         }
-        //To confirm user info change
+
+
+        //Todo: to confirm user info change
         view.confirm_info_edit.setOnClickListener {
             //send to DB and update profile UI
 
-
-            //Default State:
-            view.profile_change_info.visibility=View.VISIBLE
-            view.profile_change_text.visibility=View.VISIBLE
+            //Remove edit layout
             view.edit_name.visibility=View.GONE
             view.edit_email.visibility=View.GONE
             view.edit_phone.visibility=View.GONE
             view.confirm_info_edit.visibility=View.GONE
+
+            //Default State:
+            view.profile_change_info.visibility=View.VISIBLE
+            view.profile_change_text.visibility=View.VISIBLE
+            view.profile_fullname.visibility=View.VISIBLE
+            view.profile_emailaddress.visibility=View.VISIBLE
+            view.profile_phonenumber.visibility=View.VISIBLE
+
+            //Enable Icon:
+            view.icon_email.visibility=View.VISIBLE
+            view.icon_profile.visibility=View.VISIBLE
+            view.icon_phone.visibility=View.VISIBLE
+
         }
 
         //To sign out
         view.profile_logout.setOnClickListener{
-            firebaseAuth.signOut()
+            signOut()
         }
         //Addition:
 
@@ -79,6 +108,13 @@ class ProfileFragment : Fragment() {
 
     private fun showImageOptionDialogue(){
         //TODO: Not yet Implemented
+    }
+    private fun signOut(){
+        firebaseAuth.signOut()
+        val intent = Intent(activity, SignInActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        activity?.startActivity(intent)
+
     }
 
     private fun loadProfileData(view: View) {
@@ -92,6 +128,9 @@ class ProfileFragment : Fragment() {
                 view.profile_fullname.text = "${user!!.fullName}"
                 view.profile_emailaddress.text="${user!!.email}"
                 view.profile_phonenumber.text = "${user!!.phone}"
+
+
+
 
             }
 
