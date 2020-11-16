@@ -70,7 +70,7 @@ class ProfileFragment : Fragment() {
 
         //To sign out
         view.profile_logout.setOnClickListener{
-            //Sign Out
+            firebaseAuth.signOut()
         }
         //Addition:
 

@@ -2,6 +2,7 @@ package id.canwar.ysala.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -12,6 +13,7 @@ import com.squareup.picasso.Picasso
 import id.canwar.ysala.R
 import id.canwar.ysala.helpers.*
 import id.canwar.ysala.helpers.Formatter
+import id.canwar.ysala.models.Booking
 import id.canwar.ysala.models.Eat
 import id.canwar.ysala.models.Payment
 import id.canwar.ysala.models.User
@@ -37,6 +39,35 @@ class DetailsPaymentActivity : AppCompatActivity() {
         super.onStart()
 
         getDataUser()
+        getPaymentInvoice()
+    }
+
+    private fun getPaymentInvoice() {
+
+        val bookingId = intent.extras!!.getString(BOOKING_ID)!!
+
+        val databaseReference = firebaseDatabase.getReference("$FIREBASE_PAYMENT/$bookingId")
+
+        databaseReference.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+                val payment= snapshot.getValue(Payment::class.java)
+
+                if (payment != null) {
+                    ll_invoice.visibility = View.VISIBLE
+                    ll_dp.visibility = View.GONE
+                    btn_pay_dp.visibility = View.INVISIBLE
+                    tv_invoice.text = "Rp. ${payment.totalPayment - payment.beenPay}"
+                    btn_pay_total.text = "Pay invoice"
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
+
     }
 
     private fun getDataUser() {
@@ -132,8 +163,12 @@ class DetailsPaymentActivity : AppCompatActivity() {
         val total = costHomestay + costEat
         tv_payment_total.text = "Rp. $total,00"
 
+        ll_dp.visibility = View.VISIBLE
         val dp = total * DP_PERCENT/100
         tv_dp_payment.text = "Rp. $dp,00"
+
+        ll_invoice.visibility = View.GONE
+
 
         btn_pay_dp.setOnClickListener{
             pushDataPayment(bookingId!!, total, dp)

@@ -616,6 +616,7 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/ll_dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/normal_margin"
@@ -636,6 +637,38 @@
 
                         <TextView
                             android:id="@+id/tv_dp_payment"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:layout_gravity="center_vertical"
+                            tools:text="Rp. 1.975.000.000"
+                            android:textSize="@dimen/normal_text_size"
+                            android:textColor="@android:color/white" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_invoice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/normal_margin"
+                        android:layout_marginStart="@dimen/normal_margin"
+                        android:layout_marginEnd="@dimen/normal_margin"
+                        android:weightSum="3"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/invoice"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/normal_text_size"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_invoice"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="2"
