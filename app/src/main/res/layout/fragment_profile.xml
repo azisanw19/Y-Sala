@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView android:layout_height="match_parent"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:fillViewport="true">
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -21,6 +22,7 @@
         android:paddingEnd="@dimen/activity_margin"
         android:paddingBottom="@dimen/small_margin"
         android:text="@string/email"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/profile_fullname"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/profile_fullname"
@@ -38,6 +40,7 @@
 
         android:paddingBottom="@dimen/small_margin"
         android:text="@string/phone_number"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/profile_emailaddress"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/profile_emailaddress"
@@ -114,6 +117,7 @@
         android:layout_marginEnd="40dp"
         android:background="@drawable/round_input_booking"
 
+        android:textColor="@color/black"
         android:paddingStart="@dimen/activity_margin"
         android:paddingTop="@dimen/small_margin"
         android:paddingEnd="@dimen/activity_margin"
@@ -211,6 +215,16 @@
         android:text="@string/confirm"
         app:layout_constraintEnd_toEndOf="@id/edit_phone"
         app:layout_constraintTop_toBottomOf="@id/edit_phone" />
+
+    <ImageView
+        android:id="@+id/cancel_edit"
+        android:layout_width="74dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="57dp"
+        app:layout_constraintBottom_toBottomOf="@+id/confirm_info_edit"
+        app:layout_constraintEnd_toStartOf="@+id/confirm_info_edit"
+        app:layout_constraintTop_toTopOf="@+id/confirm_info_edit"
+        app:srcCompat="@drawable/ic_cancel" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

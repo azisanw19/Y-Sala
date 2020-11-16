@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -23,7 +24,11 @@ class ProfileFragment : Fragment() {
     private val firebaseDatabase = FirebaseDatabase.getInstance()
     private val firebaseAuth = FirebaseAuth.getInstance()
     private var user: User? = null
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         view = (inflater.inflate(R.layout.fragment_profile, container, false) as ViewGroup).apply {
 
         }
@@ -39,6 +44,7 @@ class ProfileFragment : Fragment() {
         view.edit_email.visibility=View.GONE
         view.edit_phone.visibility=View.GONE
         view.confirm_info_edit.visibility=View.GONE
+        view.cancel_edit.visibility=View.GONE
 
         //To change profile Pic
         view.profile_profilepic.setOnClickListener{
@@ -52,6 +58,7 @@ class ProfileFragment : Fragment() {
             view.icon_email.visibility=View.GONE
             view.icon_profile.visibility=View.GONE
             view.icon_phone.visibility=View.GONE
+            view.profile_logout.visibility=View.GONE
 
             view.profile_change_info.visibility=View.GONE
             view.profile_change_text.visibility=View.GONE
@@ -70,31 +77,85 @@ class ProfileFragment : Fragment() {
             view.edit_email.visibility=View.VISIBLE
             view.edit_phone.visibility=View.VISIBLE
             view.confirm_info_edit.visibility=View.VISIBLE
+            view.cancel_edit.visibility=View.VISIBLE
         }
 
+        //Todo: cancel edit
+        view.cancel_edit.setOnClickListener {
+            //Remove edit layout
+            view.edit_name.visibility = View.GONE
+            view.edit_email.visibility = View.GONE
+            view.edit_phone.visibility = View.GONE
+            view.confirm_info_edit.visibility = View.GONE
+            view.cancel_edit.visibility = View.GONE
 
+            //Default State:
+            view.profile_change_info.visibility = View.VISIBLE
+            view.profile_change_text.visibility = View.VISIBLE
+            view.profile_fullname.visibility = View.VISIBLE
+            view.profile_emailaddress.visibility = View.VISIBLE
+            view.profile_phonenumber.visibility = View.VISIBLE
+
+            //Enable Icon:
+            view.icon_email.visibility = View.VISIBLE
+            view.icon_profile.visibility = View.VISIBLE
+            view.icon_phone.visibility = View.VISIBLE
+            view.profile_logout.visibility = View.VISIBLE
+
+            Toast.makeText(
+                activity,
+                "Edit Canceled",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
         //Todo: to confirm user info change
         view.confirm_info_edit.setOnClickListener {
             //send to DB and update profile UI
+            var newname = view.edit_name.text.toString()
+            var newemail=view.edit_email.text.toString()
+            var newphone=view.edit_phone.text.toString()
+            var isFilled=false
 
-            //Remove edit layout
-            view.edit_name.visibility=View.GONE
-            view.edit_email.visibility=View.GONE
-            view.edit_phone.visibility=View.GONE
-            view.confirm_info_edit.visibility=View.GONE
+            if (newname.isBlank()||newemail.isBlank()||newphone.isBlank()) {
 
-            //Default State:
-            view.profile_change_info.visibility=View.VISIBLE
-            view.profile_change_text.visibility=View.VISIBLE
-            view.profile_fullname.visibility=View.VISIBLE
-            view.profile_emailaddress.visibility=View.VISIBLE
-            view.profile_phonenumber.visibility=View.VISIBLE
+                    Toast.makeText(
+                        activity,
+                        "You are required to filling each of the textbox!",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
-            //Enable Icon:
-            view.icon_email.visibility=View.VISIBLE
-            view.icon_profile.visibility=View.VISIBLE
-            view.icon_phone.visibility=View.VISIBLE
+            }
+            else{
+                //update user
+                val uid =  firebaseAuth.currentUser!!.uid
+                val databaseReference = firebaseDatabase.reference//getReference("$FIREBASE_USERS/$uid")
+                databaseReference.child("users").child(uid).child("fullName").setValue(newname)
+                databaseReference.child("users").child(uid).child("email").setValue(newemail)
+                databaseReference.child("users").child(uid).child("phone").setValue(newphone)
+                isFilled=true
+            }
 
+            if(isFilled) {
+                //Remove edit layout
+                view.edit_name.visibility = View.GONE
+                view.edit_email.visibility = View.GONE
+                view.edit_phone.visibility = View.GONE
+                view.confirm_info_edit.visibility = View.GONE
+                view.cancel_edit.visibility = View.GONE
+
+                //Default State:
+                view.profile_change_info.visibility = View.VISIBLE
+                view.profile_change_text.visibility = View.VISIBLE
+                view.profile_fullname.visibility = View.VISIBLE
+                view.profile_emailaddress.visibility = View.VISIBLE
+                view.profile_phonenumber.visibility = View.VISIBLE
+
+                //Enable Icon:
+                view.icon_email.visibility = View.VISIBLE
+                view.icon_profile.visibility = View.VISIBLE
+                view.icon_phone.visibility = View.VISIBLE
+                view.profile_logout.visibility = View.VISIBLE
+            }
         }
 
         //To sign out
@@ -109,6 +170,8 @@ class ProfileFragment : Fragment() {
     private fun showImageOptionDialogue(){
         //TODO: Not yet Implemented
     }
+
+
     private fun signOut(){
         firebaseAuth.signOut()
         val intent = Intent(activity, SignInActivity::class.java)
@@ -126,11 +189,8 @@ class ProfileFragment : Fragment() {
                 user = snapshot.getValue(User::class.java)
 
                 view.profile_fullname.text = "${user!!.fullName}"
-                view.profile_emailaddress.text="${user!!.email}"
+                view.profile_emailaddress.text = "${user!!.email}"
                 view.profile_phonenumber.text = "${user!!.phone}"
-
-
-
 
             }
 
