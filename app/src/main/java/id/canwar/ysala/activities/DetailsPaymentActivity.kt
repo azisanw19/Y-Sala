@@ -54,11 +54,17 @@ class DetailsPaymentActivity : AppCompatActivity() {
                 val payment= snapshot.getValue(Payment::class.java)
 
                 if (payment != null) {
-                    ll_invoice.visibility = View.VISIBLE
-                    ll_dp.visibility = View.GONE
-                    btn_pay_dp.visibility = View.INVISIBLE
-                    tv_invoice.text = "Rp. ${payment.totalPayment - payment.beenPay}"
-                    btn_pay_total.text = "Pay invoice"
+                    val bill = payment.totalPayment - payment.beenPay
+                    if (bill != 0) {
+                        ll_invoice.visibility = View.VISIBLE
+                        ll_dp.visibility = View.GONE
+                        btn_pay_dp.visibility = View.INVISIBLE
+                        tv_invoice.text = "Rp. ${payment.totalPayment - payment.beenPay}"
+                        btn_pay_total.text = "Pay invoice"
+                    }
+                    else {
+                        ll_button.visibility = View.INVISIBLE
+                    }
                 }
             }
 
