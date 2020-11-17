@@ -6,9 +6,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import id.canwar.ysala.R
 import id.canwar.ysala.adapters.ViewPagerAdapter
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import java.lang.RuntimeException
 
 class DashboardActivity : AppCompatActivity() {
+private lateinit var pagerAdapter: ViewPagerAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,7 +18,8 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun initFragment() {
-        view_pager.adapter = ViewPagerAdapter(this)
+        pagerAdapter= ViewPagerAdapter(this)
+        view_pager.adapter = pagerAdapter
 
         /** Binding view_pager and TabLayout **/
         TabLayoutMediator(main_tabs_holder, view_pager) { tab, position -> tab.icon = when (position) {

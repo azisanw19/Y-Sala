@@ -35,8 +35,34 @@ class HomestayFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        /*
+        view.homestay_search.setOnQueryTextListener(object:SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                if(p0.isNullOrBlank()){
+                    Toast.makeText(
+                        activity,
+                        "Search Bar is Empty",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                else{
+                    showSearchResult(p0)
+                }
+                //TODO("Not yet implemented")
+                return false
+            }
 
+            override fun onQueryTextChange(p0: String?): Boolean {
+                //TODO("Not yet implemented")
+                return false
+            }
+        })
+         */
         initRecyclerView(view)
+    }
+
+    private fun showSearchResult(query:String){
+
     }
 
     private fun initRecyclerView(view: View) {

@@ -151,7 +151,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="35dp"
 
-        tools:src="@tools:sample/avatars"
+        android:src="@drawable/profile_dummy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

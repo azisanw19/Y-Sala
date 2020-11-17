@@ -15,22 +15,23 @@
         android:textSize="@dimen/actionbar_text_size"
         android:textColor="@android:color/black" />
 
-    <EditText
+    <SearchView
+        android:id="@+id/homestay_search"
         android:layout_width="match_parent"
         android:layout_height="@dimen/et_round_height"
-        android:layout_marginTop="@dimen/normal_margin"
         android:layout_marginStart="@dimen/normal_margin"
+        android:layout_marginTop="@dimen/normal_margin"
         android:layout_marginEnd="@dimen/normal_margin"
         android:background="@drawable/et_round"
-        android:hint= "@string/search_hint"
         android:drawableStart="@drawable/custom_ic_location"
         android:drawablePadding="@dimen/normal_margin"
         android:ems="10"
+        android:hint="@string/search_hint"
+        android:importantForAutofill="no"
         android:inputType="text"
         android:paddingStart="@dimen/normal_margin"
         android:paddingEnd="@dimen/normal_margin"
-        android:textSize="@dimen/normal_text_size"
-        android:importantForAutofill="no" />
+        android:textSize="@dimen/normal_text_size" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_homestay"
