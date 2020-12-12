@@ -6,7 +6,7 @@ Project tugas PPL Y-SALA
 
 - __Aziz Anwar__: 18/424183/PA/18288
 
-- __Michael Rafel__: 18/427586/PA/18546
+- __Michael Rafel Hosea Siregar__: 18/427586/PA/18546
 
 - __Gabriel Agape__: 18/430263/PA/18776
 

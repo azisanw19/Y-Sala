@@ -113,7 +113,7 @@
             android:layout_marginStart="@dimen/normal_margin"
             android:layout_marginEnd="@dimen/normal_margin"
             android:background="@drawable/btn_round"
-            android:text="@string/sign_in"
+            android:text="@string/sign_up"
             android:textSize="@dimen/normal_text_size"
             android:textColor="@android:color/white"
             android:ems="10"
